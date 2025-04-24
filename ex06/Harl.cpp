@@ -1,17 +1,5 @@
 #include "Harl.hpp"
 
-void Harl::complain( std::string level )
-{
-	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-	void (Harl::*methods[4])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-
-	for (int i = 0; i < 4; i++)
-	{
-		if (levels[i] == level)
-			(this->*methods[i])();
-	}
-}
-
 void Harl::debug( void )
 {
 	std::cout << "Harl says: I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!" << std::endl;
