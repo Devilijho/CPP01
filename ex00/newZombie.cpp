@@ -8,6 +8,6 @@ Zombie* newZombie( std::string name )
 	}
 	catch (const std::bad_alloc& bad) {
 		std::cerr << "Memory allocation failed: " << bad.what() << std::endl;
-		return nullptr;
+		return NULL;
 	}
 }

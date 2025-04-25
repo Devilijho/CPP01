@@ -4,5 +4,5 @@
 #include <string>
 #include <fstream>
 
-# define ERROR 1
-# define SUCCESS 0
+#define ERROR 1
+#define SUCCESS 0

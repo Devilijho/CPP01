@@ -1,7 +1,6 @@
 #include "main.hpp"
-#include <string>
 
-int openFiles(std::string fileName, std::ifstream &ogFile, std::ofstream &newFile)
+int openFiles(const char *fileName, const char *newFileName, std::ifstream &ogFile, std::ofstream &newFile)
 {
 	ogFile.open(fileName);
 	if (!ogFile.is_open())
@@ -9,9 +8,10 @@ int openFiles(std::string fileName, std::ifstream &ogFile, std::ofstream &newFil
 		std::cerr << "Error opening file" << std::endl;
 		return (ERROR);
 	}
-	newFile.open(fileName + std::string(".replace"));
+	newFile.open(newFileName);
 	if (!newFile.is_open())
 	{
+		ogFile.close();
 		std::cerr << "Error opening file" << std::endl;
 		return (ERROR);
 	}
@@ -47,7 +47,9 @@ int	main(int ac, char **av)
 
 	std::string toReplace = av[2];
 	std::string toReplaceWith = av[3];
+	std::string newFileName = av[1];
 
+	newFileName.append(".replace");
 	if (!toReplace.length() || !toReplaceWith.length())
 	{
 		std::cerr << "Cant replace empty strings" << std::endl;
@@ -57,11 +59,10 @@ int	main(int ac, char **av)
 	std::ifstream	ogFile;
 	std::ofstream	newFile;
 
-	if (openFiles(av[1], ogFile, newFile) == ERROR)
+	if (openFiles(av[1], newFileName.c_str(), ogFile, newFile) == ERROR)
 		return (ERROR);
-	if (copyContent(ogFile, newFile, av[2], av[3]) == ERROR)
+	if (copyContent(ogFile, newFile, toReplace, toReplaceWith) == ERROR)
 		return (ERROR);
-
 	ogFile.close();
 	newFile.close();
 	return (SUCCESS);
