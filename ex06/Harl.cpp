@@ -19,3 +19,30 @@ void Harl::error( void )
 {
 	std::cout << "Harl says: This is unacceptable! I want to speak to the manager now." << std::endl;
 }
+
+void Harl::complain( std::string level )
+{
+	std::string levels[] = {"DEBUG","INFO","WARNING","ERROR"};
+	int	lvl;
+
+	for (lvl = 0; lvl < 4; lvl++)
+	{
+		if (levels[lvl] == level)
+			break ;
+	}
+
+	switch (lvl)
+	{
+		case 0:
+			this->debug();
+		case 1:
+			this->info();
+		case 2:
+			this->warning();
+		case 3:
+			this->error();
+			break ;
+		default:
+			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	}
+}
