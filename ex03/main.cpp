@@ -18,6 +18,8 @@ int main()
 		jim.attack();
 		club.setType("some other type of club");
 		jim.attack();
+		HumanB joaco("Joaco");
+		joaco.attack();
 	}
 	return 0;
 }
